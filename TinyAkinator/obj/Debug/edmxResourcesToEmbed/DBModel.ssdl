@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TinyAkinatorModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=&quot;C:\Users\Mahmoud Hamed\Desktop\TinyAkinator\TinyAkinator\bin\Debug\game.db&quot;;useutf16encoding=True" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="character_questions">
+    <Key>
+      <PropertyRef Name="character_id" />
+      <PropertyRef Name="question_id" />
+    </Key>
+    <Property Name="character_id" Type="integer" Nullable="false" />
+    <Property Name="question_id" Type="integer" Nullable="false" />
+  </EntityType>
+  <EntityType Name="characters">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+    <Property Name="description" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+    <Property Name="img_path" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+  </EntityType>
+  <EntityType Name="questions">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="integer" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="value" Type="nvarchar" MaxLength="2147483647" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_character_questions_0_0">
+    <End Role="questions" Type="Self.questions" Multiplicity="1" />
+    <End Role="character_questions" Type="Self.character_questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="questions">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="character_questions">
+        <PropertyRef Name="question_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_character_questions_1_0">
+    <End Role="characters" Type="Self.characters" Multiplicity="1" />
+    <End Role="character_questions" Type="Self.character_questions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="characters">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="character_questions">
+        <PropertyRef Name="character_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TinyAkinatorModelStoreContainer">
+    <EntitySet Name="character_questions" EntityType="Self.character_questions" store:Type="Tables" />
+    <EntitySet Name="characters" EntityType="Self.characters" store:Type="Tables" />
+    <EntitySet Name="questions" EntityType="Self.questions" store:Type="Tables" />
+    <AssociationSet Name="FK_character_questions_0_0" Association="Self.FK_character_questions_0_0">
+      <End Role="questions" EntitySet="questions" />
+      <End Role="character_questions" EntitySet="character_questions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_character_questions_1_0" Association="Self.FK_character_questions_1_0">
+      <End Role="characters" EntitySet="characters" />
+      <End Role="character_questions" EntitySet="character_questions" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

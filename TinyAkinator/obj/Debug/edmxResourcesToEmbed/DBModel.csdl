@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TinyAkinatorModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="character">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="img_path" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="questions" Relationship="Self.character_questions" FromRole="characters" ToRole="questions" />
+  </EntityType>
+  <EntityType Name="question">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="value" Type="String" MaxLength="2147483647" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="characters" Relationship="Self.character_questions" FromRole="questions" ToRole="characters" />
+  </EntityType>
+  <Association Name="character_questions">
+    <End Role="questions" Type="Self.question" Multiplicity="*" />
+    <End Role="characters" Type="Self.character" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="TinyAkinatorEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="characters" EntityType="Self.character" />
+    <EntitySet Name="questions" EntityType="Self.question" />
+    <AssociationSet Name="character_questions" Association="Self.character_questions">
+      <End Role="questions" EntitySet="questions" />
+      <End Role="characters" EntitySet="characters" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

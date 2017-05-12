@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TinyAkinatorModelStoreContainer" CdmEntityContainer="TinyAkinatorEntities">
+    <EntitySetMapping Name="characters">
+      <EntityTypeMapping TypeName="TinyAkinatorModel.character">
+        <MappingFragment StoreEntitySet="characters">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="img_path" ColumnName="img_path" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="questions">
+      <EntityTypeMapping TypeName="TinyAkinatorModel.question">
+        <MappingFragment StoreEntitySet="questions">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="value" ColumnName="value" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="character_questions" TypeName="TinyAkinatorModel.character_questions" StoreEntitySet="character_questions">
+      <EndProperty Name="questions">
+        <ScalarProperty Name="id" ColumnName="question_id" />
+      </EndProperty>
+      <EndProperty Name="characters">
+        <ScalarProperty Name="id" ColumnName="character_id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
